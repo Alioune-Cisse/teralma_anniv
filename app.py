@@ -32,7 +32,7 @@ def result():
         budget = request.form['budget']
         services = request.form.getlist('choix')
         np = request.form['nombre de personnes']
-        parts = request.form['parts']
+        parts = request.form['part']
         print(services)
         repartitions = opt(int(budget), services, [int(np), int(parts)])
         print(repartitions)
@@ -50,7 +50,7 @@ def my_route():
   services = request.args["services"]#.get('services', default = ["Traiteur", "Photo"], type = str)
   services = ast.literal_eval(services)
   np = request.args.get('np', default=100, type=int)
-  parts = request.args.get('parts', default=100, type=int)
+  parts = request.args.get('part', default=100, type=int)
   #print(f'services = {services}\nTypes = {type(services)}')
   #repartitions = pulp_optimize(cleandf, int(budget), services, invites)
   repartitions = opt(int(budget), services, [int(np), int(parts)])
