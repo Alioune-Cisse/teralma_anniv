@@ -46,18 +46,19 @@ def result():
 
 @app.route('/api/', methods=['GET', 'POST'])
 def my_route():
-  budget = request.args["budget"]#.get('budget', default = 1200000, type = int)
+  budget = request.args.get('budget', default = 100000, type = int)#.args["budget"]#
   services = request.args["services"]#.get('services', default = ["Traiteur", "Photo"], type = str)
   services = ast.literal_eval(services)
-  np = request.args.get('np', default=100, type=int)
-  parts = request.args.get('part', default=100, type=int)
+  np = request.args.get('np', default=10, type=int)
+  parts = request.args.get('part', default=6, type=int)
   #print(f'services = {services}\nTypes = {type(services)}')
   #repartitions = pulp_optimize(cleandf, int(budget), services, invites)
   repartitions = opt(int(budget), services, [int(np), int(parts)])
   #print(repartitions)
-  #return jsonify(repartitions)
+  # return jsonify(repartitions)
   response = jsonify(repartitions)
   response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
+  #print(response)
   return response
 
 if __name__ == '__main__':
